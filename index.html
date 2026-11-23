@@ -114,11 +114,17 @@
   /* Send panel */
   .send{display:none;margin-top:6px;background:var(--mint);border-radius:14px;padding:14px;gap:10px}
   .send.show{display:grid}
-  .send pre{white-space:pre-wrap;font-family:inherit;font-size:13.5px;background:#fff;border-radius:10px;padding:12px;border:1px solid var(--line);max-height:260px;overflow:auto}
-  .send .steps{font-size:13.5px;color:var(--ink)}
-  .send .steps b{color:var(--green)}
-  .btns{display:grid;gap:8px}
-  @media(min-width:480px){.btns{grid-template-columns:1fr 1fr}}
+  .send{text-align:center;justify-items:center;padding:22px 16px;border:2px solid var(--leaf)}
+  .ok-ic{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:34px;font-weight:800;display:grid;place-items:center;animation:pop .45s ease-out}
+  @keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+  .ok-title{font-size:22px!important;color:var(--green)!important;margin:4px 0 0!important}
+  .ok-sub{font-size:14px;color:var(--muted)}
+  .ok-sub b{color:var(--ink);letter-spacing:.5px}
+  .ok-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;text-align:left;width:100%;display:grid;gap:4px}
+  .ok-box .r{display:flex;justify-content:space-between;gap:10px}
+  .ok-box .kv span:first-child{white-space:nowrap;color:var(--muted)}.ok-box .kv span:last-child{text-align:right}
+  .ok-box .t{border-top:1px dashed var(--line);margin-top:4px;padding-top:6px;font-weight:800;color:var(--green)}
+  .ok-box .t span:last-child{color:var(--orange)}
 
   /* Contact */
   .contact{display:grid;gap:12px;margin-bottom:24px}
@@ -237,15 +243,13 @@
         </form>
 
         <div class="send" id="send">
-          <div class="steps"><b>Đơn của bạn đã sẵn sàng!</b> Chọn một cách gửi cho quán:</div>
-          <pre id="orderText"></pre>
-          <div class="btns">
-            <button type="button" class="btn btn-zalo" id="zaloBtn">💬 Gửi qua Zalo</button>
-            <a class="btn btn-green" id="smsBtn" href="#">✉️ Gửi tin nhắn SMS</a>
-            <button type="button" class="btn btn-outline" id="copyBtn">📋 Sao chép đơn</button>
-            <a class="btn btn-outline" href="tel:0921133166">📞 Gọi 0921 133 166</a>
-          </div>
-          <p class="fine"><b>Gửi qua Zalo:</b> đơn hàng được tự động sao chép → Zalo mở ra → bạn <b>dán (paste)</b> vào khung chat và gửi. Quán sẽ nhắn xác nhận lại.</p>
+          <div class="ok-ic">✓</div>
+          <h3 class="ok-title">Đặt đơn hàng thành công!</h3>
+          <p class="ok-sub">Mã đơn: <b id="orderCode"></b></p>
+          <div class="ok-box" id="orderSummary"></div>
+          <p class="ok-sub">Cảm ơn bạn đã đặt món tại Green Box Kitchen 🌿</p>
+          <button type="button" class="btn btn-green" id="newOrder">Đặt đơn mới</button>
+          <p class="fine" style="text-align:center">Bản demo: đơn hàng chỉ mô phỏng, không được gửi tới quán.</p>
         </div>
       </div>
     </div>
@@ -345,7 +349,7 @@
     var t=totals();
     $('cartbar').classList.toggle('show',t.n>0);
     $('cbCount').textContent=t.n; $('cbTotal').textContent=money(t.s);
-    $('send').classList.remove('show');
+    if($('send').classList.contains('show')){$('send').classList.remove('show');$('form').style.display='';}
   }
 
   // ---- Time slots ----
@@ -373,20 +377,6 @@
 
   // ---- Submit ----
   function setErr(k,bad){document.querySelector('.f[data-k='+k+']').classList.toggle('invalid',bad);return bad}
-  function buildText(){
-    var t=totals(), ship=document.querySelector('input[name=ship]:checked').value, lines=[];
-    lines.push('ĐƠN HÀNG – GREEN BOX KITCHEN');
-    Object.keys(cart).forEach(function(id){var m=MENU[id-1];lines.push('• '+pad(m.id)+' '+m.name+' x'+cart[id]+' = '+money(m.price*cart[id]))});
-    lines.push('Tạm tính: '+money(t.s)+' ('+t.n+' suất, kèm canh)');
-    lines.push('');
-    lines.push('Người nhận: '+$('name').value.trim());
-    lines.push('SĐT: '+$('phone').value.trim());
-    lines.push('Hình thức: '+ship);
-    if(ship==='Giao tận nơi') lines.push('Địa chỉ: '+$('addr').value.trim());
-    lines.push('Bữa: '+$('meal').value+' – Giờ nhận: '+$('time').value);
-    if($('note').value.trim()) lines.push('Ghi chú: '+$('note').value.trim());
-    return lines.join('\n');
-  }
   $('form').addEventListener('submit',function(e){
     e.preventDefault();
     if(!totals().n){toast('Bạn chưa chọn món nào');document.getElementById('thuc-don').scrollIntoView();return}
@@ -397,28 +387,24 @@
     var delivery=document.querySelector('input[name=ship]:checked').value==='Giao tận nơi';
     bad=setErr('addr',delivery&&!$('addr').value.trim())||bad;
     if(bad){toast('Vui lòng kiểm tra lại thông tin');return}
-    var text=buildText();
-    $('orderText').textContent=text;
-    $('smsBtn').href='sms:'+PHONE+'?&body='+encodeURIComponent(text);
+    var t=totals(), ship=document.querySelector('input[name=ship]:checked').value;
+    var code='GB'+String(Date.now()).slice(-6);
+    var rows=Object.keys(cart).map(function(id){var m=MENU[id-1];return '<div class="r"><span>'+m.name+' × '+cart[id]+'</span><span>'+money(m.price*cart[id])+'</span></div>'}).join('');
+    rows+='<div class="r t"><span>Tổng cộng ('+t.n+' suất)</span><span>'+money(t.s)+'</span></div>';
+    rows+='<div class="r kv"><span>Người nhận</span><span>'+esc($('name').value.trim())+'</span></div>';
+    rows+='<div class="r kv"><span>Nhận hàng</span><span>'+(ship==='Giao tận nơi'?'Giao tận nơi':'Đến quán lấy')+' · '+$('meal').value.split(' ')[0]+', '+$('time').value+'</span></div>';
+    $('orderCode').textContent=code;
+    $('orderSummary').innerHTML=rows;
+    $('form').style.display='none'; $('hoursNote').hidden=true;
     $('send').classList.add('show');
-    $('send').scrollIntoView({behavior:'smooth',block:'start'});
+    $('send').scrollIntoView({behavior:'smooth',block:'center'});
   });
   ['name','phone','addr'].forEach(function(k){$(k).addEventListener('input',function(){setErr(k,false)})});
+  function esc(x){return x.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
-  // ---- Copy / Zalo ----
-  function copy(text){
-    if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text).then(function(){return true},function(){return fallback(text)})}
-    return Promise.resolve(fallback(text));
-  }
-  function fallback(text){
-    try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');document.body.removeChild(ta);return ok}catch(e){return false}
-  }
-  $('copyBtn').addEventListener('click',function(){copy($('orderText').textContent).then(function(ok){toast(ok?'Đã sao chép đơn hàng':'Không sao chép được – hãy bôi đen và copy thủ công')})});
-  $('zaloBtn').addEventListener('click',function(){
-    copy($('orderText').textContent).then(function(ok){
-      toast(ok?'Đã sao chép đơn – dán vào Zalo và gửi nhé!':'Hãy copy đơn thủ công rồi dán vào Zalo');
-      setTimeout(function(){window.location.href='https://zalo.me/'+PHONE},700);
-    });
+  $('newOrder').addEventListener('click',function(){
+    cart={}; $('form').reset(); $('form').style.display=''; $('addrBox').style.display=''; fillTimes(); hoursNote();
+    update(); document.getElementById('thuc-don').scrollIntoView({behavior:'smooth'});
   });
 
   var orderVisible=false;
