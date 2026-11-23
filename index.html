@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Green Box Kitchen – Cơm gạo lứt Healthy</title>
+<meta name="description" content="Green Box Kitchen – Cơm gạo lứt healthy tại Duy Tân, Cầu Giấy, Hà Nội. Đặt món qua Zalo/Hotline 0921133166.">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1f5a32; --green-2:#2e7a45; --leaf:#7cb342; --mint:#eaf5e6; --mint-2:#d8ecd2;
+    --orange:#e8692c; --ink:#1b2a20; --muted:#5f6f64; --line:#d9e6d4; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--mint);line-height:1.5;-webkit-tap-highlight-color:transparent}
+  a{color:inherit}
+  button,input,select,textarea{font:inherit;color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+  section{scroll-margin-top:66px}
+  .serif{font-family:"Lora",Georgia,serif}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+  .brand b{font-size:17px;color:var(--green);font-weight:800;line-height:1.1}
+  .brand small{display:block;font-size:11px;color:var(--muted);font-weight:500}
+  .hcall{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:9px 14px;border-radius:999px;white-space:nowrap}
+
+  /* Hero */
+  .hero{background:linear-gradient(160deg,#fff 0%,var(--mint) 100%);padding:30px 0 26px;border-bottom:1px solid var(--line)}
+  .hero .wrap{display:grid;gap:18px;align-items:center}
+  .hero h1{font-family:"Lora",Georgia,serif;font-size:clamp(32px,8vw,52px);line-height:1.08;color:var(--green);letter-spacing:.5px}
+  .hero p.lead{color:var(--muted);font-size:16px;margin-top:10px;max-width:520px}
+  .soup{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;margin-top:14px}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;text-decoration:none;font-weight:700;border-radius:12px;padding:13px 20px;font-size:16px;transition:transform .12s,filter .12s}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 6px 16px rgba(232,105,44,.28)}
+  .btn-green{background:var(--green);color:#fff}
+  .btn-outline{background:#fff;color:var(--green);border:2px solid var(--green)}
+  .btn-zalo{background:#0068ff;color:#fff}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .hero-img{position:relative}
+  .hero-img img{width:100%;border-radius:18px;box-shadow:0 14px 34px rgba(31,90,50,.18);display:block}
+  .hero-img .tag{position:absolute;left:12px;bottom:12px;background:#fff;border-radius:12px;padding:8px 12px;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .hero-img .tag b{color:var(--orange);font-size:16px}
+  @media(min-width:820px){.hero .wrap{grid-template-columns:1.1fr 1fr}.hero{padding:48px 0 40px}}
+
+  /* Info strip */
+  .info{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 0}
+  .info div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:12.5px;color:var(--muted)}
+  .info b{display:block;color:var(--green);font-size:14px}
+
+  /* Menu */
+  .sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:34px 0 14px}
+  .sec-title h2{font-family:"Lora",Georgia,serif;font-style:italic;font-size:clamp(26px,6vw,34px);color:var(--green)}
+  .filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:none}
+  .filters button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px;cursor:pointer;color:var(--muted)}
+  .filters button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .grid{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .dish{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:box-shadow .2s,border-color .2s}
+  .dish.in-cart{border-color:var(--leaf);box-shadow:0 0 0 3px rgba(124,179,66,.25)}
+  .dish img{width:100%;aspect-ratio:307/224;object-fit:cover;display:block;background:var(--mint-2)}
+  .dish .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .dish .no{font-family:"Lora",serif;font-size:13px;color:var(--muted)}
+  .dish h3{font-size:17px;line-height:1.3;color:var(--green);font-weight:800}
+  .dish .badge{display:inline-block;font-size:11px;font-weight:700;background:var(--mint-2);color:var(--green);border-radius:999px;padding:2px 8px;margin-left:4px;vertical-align:middle}
+  .dish .desc{font-size:13.5px;color:var(--muted);flex:1}
+  .dish .row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px}
+  .price{color:var(--orange);font-weight:800;font-size:20px}
+  .qty{display:flex;align-items:center;gap:4px;background:var(--mint);border-radius:999px;padding:3px}
+  .qty button{width:36px;height:36px;border-radius:50%;border:0;background:#fff;font-size:20px;font-weight:700;color:var(--green);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+  .qty button.add{background:var(--green);color:#fff}
+  .qty span{min-width:26px;text-align:center;font-weight:800}
+  .add-first{border:0;background:var(--green);color:#fff;font-weight:700;border-radius:999px;padding:9px 16px;cursor:pointer;font-size:14px}
+
+  /* Order */
+  .order{background:#fff;border-radius:20px;border:1px solid var(--line);padding:18px;display:grid;gap:18px}
+  @media(min-width:860px){.order{grid-template-columns:1fr 1fr;padding:26px}}
+  .order h3{font-size:17px;color:var(--green);margin-bottom:10px}
+  .cart-empty{color:var(--muted);font-size:14px;background:var(--mint);border-radius:12px;padding:14px;text-align:center}
+  .cart-line{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .cart-line img{width:52px;height:40px;object-fit:cover;border-radius:8px}
+  .cart-line .n{font-size:14px;font-weight:600;line-height:1.3}
+  .cart-line .p{font-size:13px;color:var(--muted)}
+  .cart-line .qty button{width:30px;height:30px;font-size:17px}
+  .totals{margin-top:10px;font-size:14px;display:grid;gap:4px}
+  .totals div{display:flex;justify-content:space-between}
+  .totals .grand{font-size:18px;font-weight:800;color:var(--green);border-top:2px solid var(--line);padding-top:8px;margin-top:4px}
+  .totals .grand span:last-child{color:var(--orange)}
+  .fine{font-size:12.5px;color:var(--muted);margin-top:6px}
+  form{display:grid;gap:12px}
+  label{font-size:13px;font-weight:600;color:var(--muted);display:block;margin-bottom:4px}
+  input,select,textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;font-size:15px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--leaf);box-shadow:0 0 0 3px rgba(124,179,66,.2)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg{display:flex;gap:8px}
+  .seg label.opt{flex:1;margin:0;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;color:var(--ink);font-size:14px}
+  .seg input{width:auto;accent-color:var(--green)}
+  .seg label.opt:has(input:checked){border-color:var(--green);background:var(--mint)}
+  .err{color:#c62828;font-size:12.5px;margin-top:4px;display:none}
+  .invalid .err{display:block}
+  .invalid input,.invalid select{border-color:#e57373}
+  .alert{background:#fff4e5;border:1px solid #ffd59e;color:#8a5300;border-radius:12px;padding:10px 12px;font-size:13.5px}
+
+  /* Send panel */
+  .send{display:none;margin-top:6px;background:var(--mint);border-radius:14px;padding:14px;gap:10px}
+  .send.show{display:grid}
+  .send pre{white-space:pre-wrap;font-family:inherit;font-size:13.5px;background:#fff;border-radius:10px;padding:12px;border:1px solid var(--line);max-height:260px;overflow:auto}
+  .send .steps{font-size:13.5px;color:var(--ink)}
+  .send .steps b{color:var(--green)}
+  .btns{display:grid;gap:8px}
+  @media(min-width:480px){.btns{grid-template-columns:1fr 1fr}}
+
+  /* Contact */
+  .contact{display:grid;gap:12px;margin-bottom:24px}
+  @media(min-width:760px){.contact{grid-template-columns:repeat(3,1fr)}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start;text-decoration:none}
+  .card .ic{width:42px;height:42px;border-radius:12px;background:var(--mint);display:grid;place-items:center;flex:none;font-size:20px}
+  .card small{display:block;color:var(--muted);font-size:12.5px}
+  .card strong{color:var(--green);font-size:16px}
+  footer{background:var(--green);color:rgba(255,255,255,.85);text-align:center;padding:24px 16px 110px;font-size:13px}
+  footer b{color:#fff}
+
+  /* Floating cart bar */
+  .cartbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none}
+  .cartbar.show{display:block}
+  .cartbar a{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--orange);color:#fff;text-decoration:none;border-radius:16px;padding:13px 18px;font-weight:700;box-shadow:0 10px 26px rgba(232,105,44,.4)}
+  .cartbar .cnt{background:#fff;color:var(--orange);border-radius:999px;min-width:26px;height:26px;display:inline-grid;place-items:center;font-size:14px;margin-right:8px;padding:0 6px}
+
+  .toast{position:fixed;left:50%;top:74px;transform:translateX(-50%) translateY(-20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:60;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* Mobile tweaks */
+  .brand b,.brand small{white-space:nowrap}
+  @media(max-width:599px){
+    .brand b{font-size:15px}.brand small{font-size:10.5px}.brand img{width:40px;height:40px}
+    .hcall{padding:8px 12px;font-size:13px}
+    .hero{padding:22px 0 20px}
+    .hero-img img{height:190px;object-fit:cover}
+    .dish{display:grid;grid-template-columns:118px 1fr}
+    .dish img{height:100%;aspect-ratio:auto;min-height:150px}
+    .dish .body{padding:10px 12px 12px}
+    .dish h3{font-size:15px}
+    .dish .desc{font-size:12.5px}
+    .price{font-size:17px}
+    .qty button{width:32px;height:32px;font-size:18px}
+    .add-first{padding:8px 13px;font-size:13px}
+  }
+  @media(max-width:360px){.hcall span{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="img/logo.png" alt="Logo Green Box Kitchen">
+      <span><b>Green Box Kitchen</b><small>Healthy food – Healthy life</small></span>
+    </a>
+    <a class="hcall" href="tel:0921133166" aria-label="Gọi 0921133166">📞 <span>0921 133 166</span></a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Cơm gạo lứt<br>Healthy</h1>
+      <p class="lead">Suất cơm gạo lứt đủ chất – ức gà, tôm, nấm và rau củ tươi – nấu mới mỗi ngày tại Duy Tân, Cầu Giấy.</p>
+      <span class="soup">🍲 Mỗi suất kèm 1 hộp canh (rau ngót hoặc cà chua, đổi theo ngày)</span>
+      <div class="cta">
+        <a class="btn btn-primary" href="#thuc-don">🛒 Đặt món ngay</a>
+        <a class="btn btn-outline" href="tel:0921133166">📞 Gọi đặt hàng</a>
+      </div>
+      <div class="info">
+        <div><b>Thứ 2 – Thứ 7</b>Phục vụ</div>
+        <div><b>9h00 – 14h00</b>Bữa trưa</div>
+        <div><b>17h00 – 20h00</b>Bữa tối</div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="img/mon-1.jpg" alt="Cơm gạo lứt ức gà áp chảo sốt nấm" width="307" height="224">
+      <div class="tag">Chỉ từ <b>45.000đ</b>/suất</div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section id="thuc-don">
+    <div class="sec-title"><h2>Thực đơn</h2></div>
+    <div class="filters" role="group" aria-label="Lọc món">
+      <button type="button" data-f="all" aria-pressed="true">Tất cả</button>
+      <button type="button" data-f="ga" aria-pressed="false">🍗 Món gà</button>
+      <button type="button" data-f="tom" aria-pressed="false">🦐 Món tôm</button>
+      <button type="button" data-f="chay" aria-pressed="false">🌿 Món chay</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="dat-hang">
+    <div class="sec-title"><h2>Đặt đơn</h2></div>
+    <div class="order">
+      <div>
+        <h3>1. Món bạn đã chọn</h3>
+        <div id="cart"></div>
+        <div class="totals" id="totals"></div>
+        <p class="fine">Giá áp dụng khi đặt qua Facebook/trực tiếp. Phí giao hàng (nếu có) sẽ được báo khi quán xác nhận đơn.</p>
+      </div>
+      <div>
+        <h3>2. Thông tin nhận hàng</h3>
+        <div class="alert" id="hoursNote" hidden></div>
+        <form id="form" novalidate>
+          <div class="f" data-k="name"><label for="name">Họ và tên *</label><input id="name" autocomplete="name" placeholder="Nguyễn Văn A"><div class="err">Vui lòng nhập tên</div></div>
+          <div class="f" data-k="phone"><label for="phone">Số điện thoại *</label><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"><div class="err">Số điện thoại chưa đúng (10 số)</div></div>
+          <div>
+            <label>Hình thức nhận</label>
+            <div class="seg">
+              <label class="opt"><input type="radio" name="ship" value="Giao tận nơi" checked> 🛵 Giao tận nơi</label>
+              <label class="opt"><input type="radio" name="ship" value="Tự đến lấy"> 🏠 Đến lấy</label>
+            </div>
+          </div>
+          <div class="f" data-k="addr" id="addrBox"><label for="addr">Địa chỉ giao hàng *</label><input id="addr" autocomplete="street-address" placeholder="Số nhà, ngõ, đường, phường…"><div class="err">Vui lòng nhập địa chỉ giao</div></div>
+          <div class="two">
+            <div><label for="meal">Bữa</label><select id="meal"><option>Trưa (9h–14h)</option><option>Tối (17h–20h)</option></select></div>
+            <div><label for="time">Giờ nhận mong muốn</label><select id="time"></select></div>
+          </div>
+          <div><label for="note">Ghi chú</label><textarea id="note" rows="2" placeholder="VD: ít cay, không dưa chuột, gọi trước khi giao…"></textarea></div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Xác nhận đơn hàng</button>
+        </form>
+
+        <div class="send" id="send">
+          <div class="steps"><b>Đơn của bạn đã sẵn sàng!</b> Chọn một cách gửi cho quán:</div>
+          <pre id="orderText"></pre>
+          <div class="btns">
+            <button type="button" class="btn btn-zalo" id="zaloBtn">💬 Gửi qua Zalo</button>
+            <a class="btn btn-green" id="smsBtn" href="#">✉️ Gửi tin nhắn SMS</a>
+            <button type="button" class="btn btn-outline" id="copyBtn">📋 Sao chép đơn</button>
+            <a class="btn btn-outline" href="tel:0921133166">📞 Gọi 0921 133 166</a>
+          </div>
+          <p class="fine"><b>Gửi qua Zalo:</b> đơn hàng được tự động sao chép → Zalo mở ra → bạn <b>dán (paste)</b> vào khung chat và gửi. Quán sẽ nhắn xác nhận lại.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lien-he">
+    <div class="sec-title"><h2>Liên hệ</h2></div>
+    <div class="contact">
+      <a class="card" href="tel:0921133166"><span class="ic">📞</span><span><small>Hotline / Zalo</small><strong>0921 133 166</strong></span></a>
+      <div class="card"><span class="ic">👍</span><span><small>Facebook</small><strong>Fanpage Green Box</strong></span></div>
+      <a class="card" href="https://www.google.com/maps/search/?api=1&query=Duy+T%C3%A2n%2C+C%E1%BA%A7u+Gi%E1%BA%A5y%2C+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener"><span class="ic">📍</span><span><small>Địa chỉ</small><strong>Duy Tân, Cầu Giấy, Hà Nội</strong></span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <b>Green Box Kitchen</b> – Healthy food, healthy life<br>
+  Thứ 2 – Thứ 7 · Trưa 9h00–14h00 · Tối 17h00–20h00<br>
+  Giá áp dụng khi đặt qua Facebook/trực tiếp. Giá trên app giao đồ ăn có thể khác.
+</footer>
+
+<div class="cartbar" id="cartbar"><a href="#dat-hang"><span><span class="cnt" id="cbCount">0</span>Xem đơn &amp; đặt hàng</span><span id="cbTotal">0đ</span></a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var PHONE='0921133166';
+  var MENU=[
+    {id:1,cat:'ga',name:'Cơm gạo lứt ức gà áp chảo sốt nấm',price:54000,desc:'Ức gà áp chảo, sốt nấm đùi gà, bông cải xanh, dưa chuột'},
+    {id:2,cat:'ga',name:'Cơm gạo lứt ức gà nướng mật ong',price:49000,desc:'Ức gà nướng mật ong, bắp cải, khoai lang, dưa chuột'},
+    {id:3,cat:'ga',name:'Cơm gạo lứt gà xào sả ớt',price:49000,desc:'Ức gà xào sả ớt, bông cải trắng, ngô ngọt'},
+    {id:4,cat:'tom',name:'Cơm gạo lứt tôm sốt xào bông cải',price:55000,desc:'Tôm nõn sốt, bông cải xanh, bông cải trắng'},
+    {id:5,cat:'tom',name:'Cơm gạo lứt trứng cuộn tôm',price:55000,desc:'Trứng cuộn tôm, bắp cải, dưa chuột'},
+    {id:6,cat:'chay',name:'Cơm gạo lứt nấm xào rau củ',price:45000,desc:'Nấm đùi gà, bông cải xanh, bắp cải, khoai lang, ngô ngọt',veg:true}
+  ];
+  var cart={};
+  var $=function(id){return document.getElementById(id)};
+  var money=function(n){return n.toLocaleString('vi-VN')+'đ'};
+  var pad=function(n){return String(n).padStart(2,'0')};
+
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},2600)}
+
+  // ---- Menu grid ----
+  function renderGrid(){
+    $('grid').innerHTML=MENU.map(function(m){
+      return '<article class="dish" data-cat="'+m.cat+'" id="dish-'+m.id+'">'+
+        '<img src="img/mon-'+m.id+'.jpg" alt="'+m.name+'" loading="lazy" width="307" height="224">'+
+        '<div class="body"><span class="no">'+pad(m.id)+'</span>'+
+        '<h3>'+m.name+(m.veg?'<span class="badge">Chay</span>':'')+'</h3>'+
+        '<p class="desc">'+m.desc+'</p>'+
+        '<div class="row"><span class="price">'+money(m.price)+'</span><span class="ctl" data-id="'+m.id+'"></span></div>'+
+        '</div></article>';
+    }).join('');
+    renderControls();
+  }
+  function qtyHTML(id){
+    var q=cart[id]||0;
+    if(!q) return '<button type="button" class="add-first" data-act="inc" data-id="'+id+'">+ Thêm</button>';
+    return '<span class="qty"><button type="button" data-act="dec" data-id="'+id+'" aria-label="Bớt">−</button><span>'+q+'</span><button type="button" class="add" data-act="inc" data-id="'+id+'" aria-label="Thêm">+</button></span>';
+  }
+  function renderControls(){
+    document.querySelectorAll('.ctl').forEach(function(el){
+      var id=+el.dataset.id; el.innerHTML=qtyHTML(id);
+      $('dish-'+id).classList.toggle('in-cart',!!cart[id]);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-act]'); if(!b) return;
+    var id=+b.dataset.id;
+    if(b.dataset.act==='inc'){cart[id]=(cart[id]||0)+1; if(cart[id]===1) toast('Đã thêm: '+MENU[id-1].name);}
+    else {cart[id]=(cart[id]||0)-1; if(cart[id]<=0) delete cart[id];}
+    update();
+  });
+
+  // ---- Filters ----
+  document.querySelectorAll('.filters button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.filters button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      var f=b.dataset.f;
+      document.querySelectorAll('.dish').forEach(function(d){d.style.display=(f==='all'||d.dataset.cat===f)?'':'none'});
+    });
+  });
+
+  // ---- Cart ----
+  function totals(){var n=0,s=0;for(var id in cart){n+=cart[id];s+=cart[id]*MENU[id-1].price}return{n:n,s:s}}
+  function renderCart(){
+    var ids=Object.keys(cart);
+    if(!ids.length){$('cart').innerHTML='<div class="cart-empty">Chưa có món nào. Bấm <b>“+ Thêm”</b> ở thực đơn phía trên để chọn món.</div>';$('totals').innerHTML='';return}
+    $('cart').innerHTML=ids.map(function(id){var m=MENU[id-1];
+      return '<div class="cart-line"><img src="img/mon-'+id+'.jpg" alt=""><div><div class="n">'+m.name+'</div><div class="p">'+money(m.price)+' × '+cart[id]+' = <b>'+money(m.price*cart[id])+'</b></div></div>'+qtyHTML(id)+'</div>';
+    }).join('');
+    var t=totals();
+    $('totals').innerHTML='<div><span>Số suất</span><span>'+t.n+' suất (kèm '+t.n+' hộp canh)</span></div><div class="grand"><span>Tạm tính</span><span>'+money(t.s)+'</span></div>';
+  }
+  function update(){
+    renderControls(); renderCart();
+    var t=totals();
+    $('cartbar').classList.toggle('show',t.n>0);
+    $('cbCount').textContent=t.n; $('cbTotal').textContent=money(t.s);
+    $('send').classList.remove('show');
+  }
+
+  // ---- Time slots ----
+  function fillTimes(){
+    var lunch=$('meal').selectedIndex===0, opts=['Sớm nhất có thể'];
+    var start=lunch?9*60+30:17*60+30, end=lunch?14*60:20*60;
+    for(var m=start;m<=end;m+=30) opts.push(pad(Math.floor(m/60))+':'+pad(m%60));
+    $('time').innerHTML=opts.map(function(o){return '<option>'+o+'</option>'}).join('');
+  }
+  $('meal').addEventListener('change',fillTimes);
+  function hoursNote(){
+    var d=new Date(), day=d.getDay(), mins=d.getHours()*60+d.getMinutes(), msg='';
+    if(day===0) msg='Hôm nay Chủ nhật quán nghỉ. Bạn vẫn có thể đặt trước cho Thứ 2 – ghi rõ ngày vào phần ghi chú nhé.';
+    else if(mins<9*60) msg='Quán mở nhận đơn từ 9h00. Bạn có thể đặt trước, quán sẽ xác nhận khi mở cửa.';
+    else if(mins>14*60&&mins<17*60){msg='Đang ngoài giờ bữa trưa. Bạn có thể đặt trước cho bữa tối (17h–20h).';$('meal').selectedIndex=1;}
+    else if(mins>20*60) msg='Quán đã hết giờ phục vụ hôm nay. Bạn có thể đặt trước cho ngày mai – ghi rõ vào phần ghi chú nhé.';
+    else if(mins>=17*60) $('meal').selectedIndex=1;
+    if(msg){$('hoursNote').textContent='⏰ '+msg;$('hoursNote').hidden=false}
+  }
+
+  // ---- Ship toggle ----
+  document.querySelectorAll('input[name=ship]').forEach(function(r){r.addEventListener('change',function(){
+    $('addrBox').style.display=document.querySelector('input[name=ship]:checked').value==='Giao tận nơi'?'':'none';
+  })});
+
+  // ---- Submit ----
+  function setErr(k,bad){document.querySelector('.f[data-k='+k+']').classList.toggle('invalid',bad);return bad}
+  function buildText(){
+    var t=totals(), ship=document.querySelector('input[name=ship]:checked').value, lines=[];
+    lines.push('ĐƠN HÀNG – GREEN BOX KITCHEN');
+    Object.keys(cart).forEach(function(id){var m=MENU[id-1];lines.push('• '+pad(m.id)+' '+m.name+' x'+cart[id]+' = '+money(m.price*cart[id]))});
+    lines.push('Tạm tính: '+money(t.s)+' ('+t.n+' suất, kèm canh)');
+    lines.push('');
+    lines.push('Người nhận: '+$('name').value.trim());
+    lines.push('SĐT: '+$('phone').value.trim());
+    lines.push('Hình thức: '+ship);
+    if(ship==='Giao tận nơi') lines.push('Địa chỉ: '+$('addr').value.trim());
+    lines.push('Bữa: '+$('meal').value+' – Giờ nhận: '+$('time').value);
+    if($('note').value.trim()) lines.push('Ghi chú: '+$('note').value.trim());
+    return lines.join('\n');
+  }
+  $('form').addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!totals().n){toast('Bạn chưa chọn món nào');document.getElementById('thuc-don').scrollIntoView();return}
+    var phone=$('phone').value.replace(/[\s.\-]/g,'');
+    var bad=false;
+    bad=setErr('name',!$('name').value.trim())||bad;
+    bad=setErr('phone',!/^(0|\+84)\d{9}$/.test(phone))||bad;
+    var delivery=document.querySelector('input[name=ship]:checked').value==='Giao tận nơi';
+    bad=setErr('addr',delivery&&!$('addr').value.trim())||bad;
+    if(bad){toast('Vui lòng kiểm tra lại thông tin');return}
+    var text=buildText();
+    $('orderText').textContent=text;
+    $('smsBtn').href='sms:'+PHONE+'?&body='+encodeURIComponent(text);
+    $('send').classList.add('show');
+    $('send').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  ['name','phone','addr'].forEach(function(k){$(k).addEventListener('input',function(){setErr(k,false)})});
+
+  // ---- Copy / Zalo ----
+  function copy(text){
+    if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(text).then(function(){return true},function(){return fallback(text)})}
+    return Promise.resolve(fallback(text));
+  }
+  function fallback(text){
+    try{var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');document.body.removeChild(ta);return ok}catch(e){return false}
+  }
+  $('copyBtn').addEventListener('click',function(){copy($('orderText').textContent).then(function(ok){toast(ok?'Đã sao chép đơn hàng':'Không sao chép được – hãy bôi đen và copy thủ công')})});
+  $('zaloBtn').addEventListener('click',function(){
+    copy($('orderText').textContent).then(function(ok){
+      toast(ok?'Đã sao chép đơn – dán vào Zalo và gửi nhé!':'Hãy copy đơn thủ công rồi dán vào Zalo');
+      setTimeout(function(){window.location.href='https://zalo.me/'+PHONE},700);
+    });
+  });
+
+  var orderVisible=false;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){orderVisible=es[0].isIntersecting;$('cartbar').style.visibility=orderVisible?'hidden':'visible'},{threshold:0.05}).observe($('dat-hang'));
+  }
+  renderGrid(); renderCart(); fillTimes(); hoursNote();
+})();
+</script>
+</body>
+</html>
